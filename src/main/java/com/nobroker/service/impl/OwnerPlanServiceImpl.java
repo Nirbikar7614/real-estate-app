@@ -7,6 +7,9 @@ import com.nobroker.service.OwnerPlanService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class OwnerPlanServiceImpl implements OwnerPlanService {
 
@@ -24,6 +27,13 @@ public class OwnerPlanServiceImpl implements OwnerPlanService {
         OwnerPlan savedOwnerPlan = ownerPlanRepository.save(ownerPlan);
         return mapToDto(savedOwnerPlan);
     }
+
+    @Override
+    public List<OwnerPlanDto> getALlOwnerPlans() {
+        List<OwnerPlan> allPlans = ownerPlanRepository.findAll();
+        return allPlans.stream().map(p->mapToDto(p)).collect(Collectors.toList());
+    }
+
     OwnerPlan mapToEntity(OwnerPlanDto ownerPlanDto){
         OwnerPlan ownerPlan = modelMapper.map(ownerPlanDto, OwnerPlan.class);
         return ownerPlan;
