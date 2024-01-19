@@ -18,6 +18,7 @@ public class User {
     private long id;
     private String name;
     private String email;
-    private String mobile;
     private String password;
+    private String mobile;
+    private boolean emailVerified;
 }
